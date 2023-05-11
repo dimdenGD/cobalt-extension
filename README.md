@@ -3,4 +3,4 @@ Adds "download media" button to right-click menu of links, right-click menu of c
   
 Supports setting instance and if to press save button automatically.  
   
-![Screenshot](https://lune.dimden.dev/4018ff9515.png)  
+![Screenshot](https://lune.dimden.dev/e9db75a55a.png)  

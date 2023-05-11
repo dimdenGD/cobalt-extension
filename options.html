@@ -6,14 +6,20 @@
         body {
             font-family: "Noto Sans Mono", "Consolas", "SF Mono", monospace;
         }
+        .smol {
+            font-size: 0.8em;
+            color: gray;
+        }
     </style>
   </head>
   <body>
     <h1>cobalt extension options</h1>
-    Instance: <input value="co.wukko.me" id="instance" placeholder="instance"><br>
-    Press on save button automatically: <input type="checkbox" id="auto"><br>
+    instance: <input value="co.wukko.me" id="instance" placeholder="instance"><br><br>
+    press on save button automatically: <input type="checkbox" id="auto" style="vertical-align:sub"><br>
     <br>
-    <button id="save">Save</button>
+    <button id="save">save</button>
+    <br><br>
+    <span class="smol">extension made by <a href="https://dimden.dev/" target="_blank">dimden</a></span>
     <script src="options.js"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-let patterns = [
+const patterns = [
     "*://*.bilibili.com/video/*",
 
     "*://*.instagram.com/p/*",
@@ -46,6 +46,16 @@ chrome.contextMenus.create({
     documentUrlPatterns: patterns
 });
 chrome.action.onClicked.addListener(tab => {
+    let matched = false;
+    for(let pattern of patterns) {
+        if(tab.url.includes(pattern.split("*://*.")[1].split("/")[0])) {
+            matched = true;
+            break;
+        }
+    }
+    if(!matched) {
+        return;
+    }
     chrome.storage.sync.get(
         { instance: 'co.wukko.me' },
         (items) => {

@@ -10,8 +10,7 @@
   "permissions": [
     "activeTab",
     "contextMenus",
-    "storage",
-    "action"
+    "storage"
   ],
   "icons": {
     "128": "/images/co.png"
