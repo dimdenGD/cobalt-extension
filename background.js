@@ -11,7 +11,7 @@ let patterns = [
     
     "*://*.reddit.com/r/*/comments/*/*",
 
-    "*://*.soundcloud.com/*/*",
+    "*://*.soundcloud.com/*",
     "*://*.soundcloud.app.goo.gl/*",
 
     "*://*.tumblr.com/post/*",
