@@ -10,7 +10,8 @@
   "permissions": [
     "activeTab",
     "contextMenus",
-    "storage"
+    "storage",
+    "action"
   ],
   "icons": {
     "128": "/images/co.png"
@@ -19,7 +20,7 @@
     "default_icon": {
       "128": "/images/co.png"
     },
-    "default_title": "download media"
+    "default_title": "download media from this page"
   },
   "options_page": "options.html",
   "content_scripts": [

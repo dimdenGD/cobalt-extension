@@ -30,20 +30,30 @@ let patterns = [
     "*://*.vk.com/*?w=wall*",
     "*://*.vk.com/clip*",
 
-    "*://*.vine.co/*",
+    "*://*.vine.co/*"
 ];
 
 chrome.contextMenus.create({
-    title: "Download media from link",
+    title: "download media from link",
     contexts: ["link"],
     id: "download-media-from-link",
     targetUrlPatterns: patterns
 });
 chrome.contextMenus.create({
-    title: "Download media from this page",
+    title: "download media from this page",
     contexts: ["page"],
     id: "download-media-from-page",
     documentUrlPatterns: patterns
+});
+chrome.action.onClicked.addListener(tab => {
+    chrome.storage.sync.get(
+        { instance: 'co.wukko.me' },
+        (items) => {
+            chrome.tabs.create({
+                url: `https://${items.instance}/?u=${tab.url}`
+            });
+        }
+    );
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
