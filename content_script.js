@@ -1,4 +1,3 @@
-
 chrome.storage.sync.get(
     { instance: 'co.wukko.me', auto: true },
     (items) => {

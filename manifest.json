@@ -21,12 +21,15 @@
     },
     "default_title": "download media from this page"
   },
-  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["content_script.js"],
-      "run_at": "document_idle"
+      "run_at": "document_end"
     }
   ]
 }
