@@ -4,5 +4,10 @@ Adds "download media" button to right-click menu of links, right-click menu of c
 Supports setting cobalt instance and if to press save button automatically.  
   
 ![Screenshot](https://lune.dimden.dev/e9db75a55a.png)  
+
+### Install
+**Chrome, Opera, Brave & Chromium browsers:** [Chrome Web Store](https://chrome.google.com/webstore/detail/cobalt-downloader/aljdknakoehcmmhflhfakfabbohhlohn)  
+**Firefox:** [Firefox Addons](https://addons.mozilla.org/uk/firefox/addon/cobalt-downloader/)  
+  
   
 Powered by [cobalt](https://github.com/wukko/cobalt/).  
