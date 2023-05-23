@@ -25,6 +25,7 @@ const patterns = [
 
     "*://*.youtube.com/watch?*",
     "*://*.youtu.be/*",
+    "*://*.youtube.com/shorts/*",
 
     "*://*.vk.com/video*",
     "*://*.vk.com/*?w=wall*",
