@@ -12,7 +12,7 @@ const saveOptions = () => {
 
 const restoreOptions = () => {
     chrome.storage.sync.get(
-        { instance: 'co.wukko.me', auto: true },
+        { instance: 'cobalt.tools', auto: true },
         (items) => {
             document.getElementById('instance').value = items.instance;
             document.getElementById('auto').checked = items.auto;

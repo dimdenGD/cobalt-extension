@@ -31,7 +31,10 @@ const patterns = [
     "*://*.vk.com/*?w=wall*",
     "*://*.vk.com/clip*",
 
-    "*://*.vine.co/*"
+    "*://*.vine.co/*",
+
+    "*://*.streamable.com/*",
+    "*://*.pinterest.com/pin/*"
 ];
 
 chrome.contextMenus.create({
@@ -58,7 +61,7 @@ chrome.action.onClicked.addListener(tab => {
         return;
     }
     chrome.storage.sync.get(
-        { instance: 'co.wukko.me' },
+        { instance: 'cobalt.tools' },
         (items) => {
             chrome.tabs.create({
                 url: `https://${items.instance}/?u=${tab.url}`
@@ -70,7 +73,7 @@ chrome.action.onClicked.addListener(tab => {
 chrome.contextMenus.onClicked.addListener((info, tab) => {
     if(info.menuItemId === "download-media-from-link") {
         chrome.storage.sync.get(
-            { instance: 'co.wukko.me' },
+            { instance: 'cobalt.tools' },
             (items) => {
                 chrome.tabs.create({
                     url: `https://${items.instance}/?u=${info.linkUrl}`
@@ -79,7 +82,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         );
     } else if(info.menuItemId === "download-media-from-page") {
         chrome.storage.sync.get(
-            { instance: 'co.wukko.me' },
+            { instance: 'cobalt.tools' },
             (items) => {
                 chrome.tabs.create({
                     url: `https://${items.instance}/?u=${tab.url}`
