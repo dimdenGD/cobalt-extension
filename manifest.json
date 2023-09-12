@@ -1,7 +1,7 @@
 {
   "name": "cobalt downloader",
   "description": "allows easy downloads of media via cobalt.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "manifest_version": 3,
   "homepage_url": "https://github.com/dimdenGD/cobalt-extension",
   "background": {
