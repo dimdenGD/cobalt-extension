@@ -1,22 +1,16 @@
 {
   "name": "cobalt downloader",
   "description": "allows easy downloads of media via cobalt.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "manifest_version": 3,
   "homepage_url": "https://github.com/dimdenGD/cobalt-extension",
+  "background": {
+    "service_worker": "background.js"
+  },
   "permissions": [
     "activeTab",
     "contextMenus",
     "storage"
-  ],
-  "background": {
-    "service_worker": "background.js"
-  },
-  "optional_permissions": [
-    "webRequest"
-  ],
-  "host_permissions": [
-    "<all_urls>"
   ],
   "icons": {
     "128": "/images/co.png"
