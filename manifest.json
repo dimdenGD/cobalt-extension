@@ -5,7 +5,9 @@
   "manifest_version": 3,
   "homepage_url": "https://github.com/dimdenGD/cobalt-extension",
   "background": {
-    "service_worker": "background.js"
+    "scripts": [
+      "background.js"
+    ]
   },
   "permissions": [
     "activeTab",
