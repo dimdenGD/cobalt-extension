@@ -38,12 +38,15 @@ copyDir('./', '../CobaltExtFirefox').then(async () => {
 
     let manifest = JSON.parse(await fsp.readFile('../CobaltExtTempChrome/manifest.json', 'utf8'));
     manifest.background.scripts = [manifest.background.service_worker];
+    delete manifest.background.service_worker;
     manifest.browser_specific_settings = {
         gecko: {
             id: "cobalt@dimden.dev",
             strict_min_version: "101.0"
         }
     };
+    manifest.optional_permissions = ['webRequest'];
+    manifest.host_permissions = ['<all_urls>'];
     delete manifest.background.service_worker;
     delete manifest.content_scripts;
 
