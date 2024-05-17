@@ -8,6 +8,10 @@ const patterns = [
     "*://*.twitter.com/*/status/*",
     "*://*.twitter.com/*/status/*/video/*",
     "*://*.twitter.com/i/spaces/*",
+
+    "*://*.x.com/*/status/*",
+    "*://*.x.com/*/status/*/video/*",
+    "*://*.x.com/i/spaces/*",
     
     "*://*.reddit.com/r/*/comments/*/*",
 
