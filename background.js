@@ -67,7 +67,7 @@ chrome.action.onClicked.addListener(tab => {
     chrome.storage.sync.get(
         { instance: 'api.cobalt.tools' },
         (items) => {
-            fetch('https://api.cobalt.tools/api/json', {
+            fetch(`https:///${items.instance}/api/json`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -86,9 +86,9 @@ chrome.action.onClicked.addListener(tab => {
 chrome.contextMenus.onClicked.addListener((info, tab) => {  
     if(info.menuItemId === "download-media-from-link") {
         chrome.storage.sync.get(
-            { instance: 'cobalt.tools' },
+            { instance: 'api.cobalt.tools' },
             (items) => {
-                fetch('https://api.cobalt.tools/api/json', {
+                fetch(`https:///${items.instance}/api/json`, {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json',
@@ -104,9 +104,9 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         );
     } else if(info.menuItemId === "download-media-from-page") {
         chrome.storage.sync.get(
-            { instance: 'cobalt.tools' },
+            { instance: 'api.cobalt.tools' },
             (items) => {
-                fetch('https://api.cobalt.tools/api/json', {
+                fetch(`https:///${items.instance}/api/json`, {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json',
