@@ -74,7 +74,8 @@ chrome.action.onClicked.addListener(tab => {
                   'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                  url: tab.url
+                  url: tab.url,
+                  filenamePattern: 'pretty'
                 })
               }).then(response => response.json())
               .then(data => chrome.tabs.create({url: data.url}));
@@ -94,7 +95,8 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
                       'Accept': 'application/json'
                     },
                     body: JSON.stringify({
-                      url: info.linkUrl
+                      url: info.linkUrl,
+                      filenamePattern: 'pretty'
                     })
                   }).then(response => response.json())
                   .then(data => chrome.tabs.create({url: data.url}));
@@ -111,7 +113,8 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
                       'Accept': 'application/json'
                     },
                     body: JSON.stringify({
-                      url: tab.url
+                      url: tab.url,
+                      filenamePattern: 'pretty'
                     })
                   }).then(response => response.json())
                   .then(data => chrome.tabs.create({url: data.url}));
