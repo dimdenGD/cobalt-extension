@@ -1,5 +1,5 @@
 const saveOptions = () => {
-    const instance = document.getElementById('instance').value;
+    const apiurl = document.getElementById('instance').value;
     const auto = document.getElementById('auto').checked;
 
     chrome.storage.sync.set(
@@ -12,9 +12,9 @@ const saveOptions = () => {
 
 const restoreOptions = () => {
     chrome.storage.sync.get(
-        { instance: 'cobalt.tools', auto: true },
+        { apiurl: 'api.cobalt.tools', auto: true },
         (items) => {
-            document.getElementById('instance').value = items.instance;
+            document.getElementById('instance').value = items.apiurl;
             document.getElementById('auto').checked = items.auto;
         }
     );

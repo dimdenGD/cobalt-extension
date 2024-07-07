@@ -65,32 +65,60 @@ chrome.action.onClicked.addListener(tab => {
         return;
     }
     chrome.storage.sync.get(
-        { instance: 'cobalt.tools' },
+        { apiurl: 'api.cobalt.tools' },
         (items) => {
-            chrome.tabs.create({
-                url: `https://${items.instance}/?u=${tab.url}`
-            });
+            fetch(`https:///${items.apiurl}/api/json`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                  url: tab.url,
+                  filenamePattern: 'pretty'
+                })
+              }).then(response => response.json())
+              .then(data => chrome.tabs.create({url: data.url}));
         }
     );
 });
 
-chrome.contextMenus.onClicked.addListener((info, tab) => {
+chrome.contextMenus.onClicked.addListener((info, tab) => {  
     if(info.menuItemId === "download-media-from-link") {
         chrome.storage.sync.get(
-            { instance: 'cobalt.tools' },
+            { apiurl: 'api.cobalt.tools' },
             (items) => {
-                chrome.tabs.create({
-                    url: `https://${items.instance}/?u=${info.linkUrl}`
-                });
+                fetch(`https:///${items.apiurl}/api/json`, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                      url: info.linkUrl,
+                      filenamePattern: 'pretty'
+                    })
+                  }).then(response => response.json())
+                  .then(data => chrome.tabs.create({url: data.url}));
             }
         );
     } else if(info.menuItemId === "download-media-from-page") {
         chrome.storage.sync.get(
-            { instance: 'cobalt.tools' },
+            { apiurl: 'api.cobalt.tools' },
             (items) => {
-                chrome.tabs.create({
-                    url: `https://${items.instance}/?u=${tab.url}`
-                });
+                fetch(`https:///${items.apiurl}/api/json`, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                      url: tab.url,
+                      filenamePattern: 'pretty'
+                    })
+                  }).then(response => response.json())
+                  .then(data => chrome.tabs.create({url: data.url}));
+                
             }
         );
     }
