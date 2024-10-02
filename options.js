@@ -3,7 +3,7 @@ const saveOptions = () => {
     const auto = document.getElementById('auto').checked;
 
     chrome.storage.sync.set(
-        { instance, auto },
+        { apiurl, auto },
         () => {
             alert('Options saved.')
         }
