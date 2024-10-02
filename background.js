@@ -67,18 +67,7 @@ chrome.action.onClicked.addListener(tab => {
     chrome.storage.sync.get(
         { apiurl: 'api.cobalt.tools' },
         (items) => {
-            fetch(`https:///${items.apiurl}/api/json`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                  url: tab.url,
-                  filenamePattern: 'pretty'
-                })
-              }).then(response => response.json())
-              .then(data => chrome.tabs.create({url: data.url}));
+            downloadItem(items.apiurl, tab.url);
         }
     );
 });
@@ -88,38 +77,60 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         chrome.storage.sync.get(
             { apiurl: 'api.cobalt.tools' },
             (items) => {
-                fetch(`https:///${items.apiurl}/api/json`, {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                      'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                      url: info.linkUrl,
-                      filenamePattern: 'pretty'
-                    })
-                  }).then(response => response.json())
-                  .then(data => chrome.tabs.create({url: data.url}));
+                downloadItem(items.apiurl, info.linkUrl)
             }
         );
     } else if(info.menuItemId === "download-media-from-page") {
         chrome.storage.sync.get(
             { apiurl: 'api.cobalt.tools' },
             (items) => {
-                fetch(`https:///${items.apiurl}/api/json`, {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                      'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                      url: tab.url,
-                      filenamePattern: 'pretty'
-                    })
-                  }).then(response => response.json())
-                  .then(data => chrome.tabs.create({url: data.url}));
-                
+                downloadItem(items.apiurl, tab.url);
             }
         );
     }
 });
+async function downloadItem(apiUrl, targetUrl) {
+    const v = await getApiVersion(apiUrl);
+    const fetchFn = v.startsWith('7.') ? fetchv7 : fetchv10;
+    const res = await fetchFn(apiUrl, targetUrl);
+    const json = await res.json();
+    chrome.tabs.create({url: json.url});
+}
+async function getApiVersion(url) {
+    const res = await fetch(`https:///${url}/api/serverInfo`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    });
+    const info = await res.json();
+    return info.cobalt !== undefined ? info.cobalt.version : info.version;
+}
+function fetchv10(url, targetUrl) {
+    return fetch(`https:///${url}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            url: targetUrl,
+            filenameStyle: 'pretty'
+        })
+    });
+}
+function fetchv7(url, targetUrl) {
+    return fetch(`https:///${url}/api/json`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            url: targetUrl,
+            filenamePattern: 'pretty'
+        })
+    });
+}
+
