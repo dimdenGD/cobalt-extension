@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "priority": 1,
+        "action": {
+            "type": "modifyHeaders",
+            "requestHeaders": [
+                {
+                    "header": "origin",
+                    "operation": "set",
+                    "value": "https://cobalt.tools"
+                },
+                {
+                    "header": "referer",
+                    "operation": "remove"
+                },
+                {
+                    "header": "sec-fetch-site",
+                    "operation": "set",
+                    "value": "same-origin"
+                }
+            ]
+        },
+        "condition": {
+            "urlFilter": "||cobalt.tools/*",
+            "resourceTypes": ["main_frame", "sub_frame", "stylesheet", "script", "image", "font", "xmlhttprequest", "other"]
+        }
+    }
+]
