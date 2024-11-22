@@ -90,14 +90,25 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     }
 });
 async function downloadItem(apiUrl, targetUrl) {
-    const v = await getApiVersion(apiUrl);
-    const fetchFn = v.startsWith('7.') ? fetchv7 : fetchv10;
-    const res = await fetchFn(apiUrl, targetUrl);
-    const json = await res.json();
-    chrome.tabs.create({url: json.url});
+    try {
+        const v = await getApiVersion(apiUrl);
+        const fetchFn = v?.startsWith?.('7.') ? fetchv7 : fetchv10;
+        const res = await fetchFn(apiUrl, targetUrl);
+        const json = await res.json();
+        if(!json.url) throw new Error("no url");
+        chrome.tabs.create({url: json.url});
+    } catch(e) {
+        let au = apiUrl;
+        if(!au.startsWith("https://") && !au.startsWith("http://")) au = `https://` + au;
+        au = au.replace("https://api.", "https://").replace("http://api.", "http://");
+        if(!au.endsWith("/")) au += '/';
+        au += `?u=${targetUrl}`;
+        chrome.tabs.create({url: au });
+        console.error(e);
+    }
 }
 async function getApiVersion(url) {
-    const res = await fetch(`https:///${url}/api/serverInfo`, {
+    const res = await fetch(`https://${url}/api/serverInfo`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -108,7 +119,7 @@ async function getApiVersion(url) {
     return info.cobalt !== undefined ? info.cobalt.version : info.version;
 }
 function fetchv10(url, targetUrl) {
-    return fetch(`https:///${url}`, {
+    return fetch(`https://${url}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -121,7 +132,7 @@ function fetchv10(url, targetUrl) {
     });
 }
 function fetchv7(url, targetUrl) {
-    return fetch(`https:///${url}/api/json`, {
+    return fetch(`https://${url}/api/json`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
