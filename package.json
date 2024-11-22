@@ -1,0 +1,27 @@
+{
+  "name": "cobalt-extension",
+  "version": "1.0.0",
+  "description": "allows easy downloads of media via cobalt.",
+  "main": "pack.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimdenGD/cobalt-extension.git"
+  },
+  "keywords": [
+    "cobalt",
+    "downloader",
+    "extension"
+  ],
+  "author": "dimden.dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dimdenGD/cobalt-extension/issues"
+  },
+  "homepage": "https://github.com/dimdenGD/cobalt-extension#readme",
+  "dependencies": {
+    "adm-zip": "^0.5.16"
+  }
+}

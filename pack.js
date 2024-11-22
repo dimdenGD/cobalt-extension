@@ -12,7 +12,7 @@ async function copyDir(src, dest) {
     const entries = await fsp.readdir(src, { withFileTypes: true });
     await fsp.mkdir(dest);
     for (let entry of entries) {
-        if(entry.name === '.git' || entry.name === '.github' || entry.name === '_metadata') continue;
+        if(entry.name === '.git' || entry.name === '.github' || entry.name === '_metadata' || entry.name === 'node_modules') continue;
         const srcPath = path.join(src, entry.name);
         const destPath = path.join(dest, entry.name);
         if (entry.isDirectory()) {
@@ -68,8 +68,12 @@ copyDir('./', '../CobaltExtFirefox').then(async () => {
     fs.writeFileSync('../CobaltExtFirefox/manifest.json', JSON.stringify(manifest, null, 2));
     fs.writeFileSync('../CobaltExtFirefox/options.html', options_html);
     fs.unlinkSync('../CobaltExtFirefox/pack.js');
-    fs.unlinkSync('../CobaltExtFirefox/content_script.js');
     fs.unlinkSync('../CobaltExtTempChrome/pack.js');
+    fs.unlinkSync('../CobaltExtFirefox/content_script.js');
+    fs.unlinkSync('../CobaltExtTempChrome/package-lock.json');
+    fs.unlinkSync('../CobaltExtFirefox/package-lock.json');
+    fs.unlinkSync('../CobaltExtTempChrome/package.json');
+    fs.unlinkSync('../CobaltExtFirefox/package.json');
 
     console.log("Patched!");
     if (fs.existsSync('../CobaltExtFirefox.zip')) {
